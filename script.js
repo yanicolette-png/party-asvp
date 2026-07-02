@@ -1,20 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwEmann0ogv1VKB1DzxMH69BU8Gah_lsruUOUN-qhUjr9Y-xwga-UZG3yenazLpHzw8/exec";
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbwEmann0ogv1VKB1DzxMH69BU8Gah_lsruUOUN-qhUjr9Y-xwga-UZG3yenazLpHzw8/exec";
 
   const form = document.getElementById("rsvpForm");
   const submitBtn = form?.querySelector(".submit-btn");
+
   const lunchAttend = document.getElementById("lunchAttend");
   const lunchAbsent = document.getElementById("lunchAbsent");
+
   const parkingSection = document.getElementById("parkingSection");
   const dietarySection = document.getElementById("dietarySection");
 
-  if (!form || !submitBtn || !lunchAttend || !lunchAbsent || !parkingSection || !dietarySection) {
-    console.error("RSVP form elements are missing. Check the IDs in index.html.");
+  if (
+    !form ||
+    !submitBtn ||
+    !lunchAttend ||
+    !lunchAbsent ||
+    !parkingSection ||
+    !dietarySection
+  ) {
+    console.error(
+      "RSVP form elements are missing. Check the element IDs in index.html."
+    );
     return;
   }
 
-  const parkingInputs = parkingSection.querySelectorAll('input[name="Parking"]');
-  const dietaryInput = dietarySection.querySelector('textarea[name="Dietary"]');
+  const parkingInputs = parkingSection.querySelectorAll(
+    'input[name="Parking"]'
+  );
+
+  const dietaryInput = dietarySection.querySelector(
+    'textarea[name="Dietary"]'
+  );
 
   function setSectionVisible(section, visible) {
     section.classList.toggle("hidden-section", !visible);
@@ -30,21 +47,24 @@ document.addEventListener("DOMContentLoaded", () => {
     parkingInputs.forEach((input) => {
       input.disabled = !isAttending;
 
-      // Remove an old answer if the guest changes from Attend to Absent.
-      if (!isAttending) input.checked = false;
+      if (!isAttending) {
+        input.checked = false;
+      }
     });
 
     if (dietaryInput) {
       dietaryInput.disabled = !isAttending;
-      if (!isAttending) dietaryInput.value = "";
+
+      if (!isAttending) {
+        dietaryInput.value = "";
+      }
     }
   }
 
-  [lunchAttend, lunchAbsent].forEach((input) => {
-    input.addEventListener("change", updateConditionalSections);
-  });
+  lunchAttend.addEventListener("change", updateConditionalSections);
+  lunchAbsent.addEventListener("change", updateConditionalSections);
 
-  // Initial state: only the lunch attendance question is visible.
+  // Hide Parking and Dietary when the page first loads.
   updateConditionalSections();
 
   form.addEventListener("submit", async (event) => {
@@ -57,13 +77,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formData = new FormData(form);
 
+    // These five names must match the Google Sheet headers.
     const data = {
-      Name: formData.get("Name") || "",
-      Lunch: formData.get("Lunch") || "",
-      Parking: formData.get("Parking") || "",
-      Dietary: formData.get("Dietary") || "",
-      MSG: formData.get("MSG") || ""
+      Name: String(formData.get("Name") || "").trim(),
+      Lunch: String(formData.get("Lunch") || "").trim(),
+      Parking: String(formData.get("Parking") || "").trim(),
+      Dietary: String(formData.get("Dietary") || "").trim(),
+      MSG: String(formData.get("MSG") || "").trim()
     };
+
+    console.log("Submitting RSVP:", data);
 
     submitBtn.disabled = true;
     submitBtn.innerHTML = "送信中...<span>Sending...</span>";
@@ -82,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <section class="text-section">
           <h2>ありがとうございます</h2>
           <span>Thank you for your RSVP</span>
+
           <p>
             ご回答を受け付けました。<br><br>
             Your response has been received.<br><br>
@@ -95,10 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth"
       });
     } catch (error) {
-      console.error(error);
+      console.error("RSVP submission error:", error);
+
       alert("送信できませんでした。もう一度お試しください。");
+
       submitBtn.disabled = false;
-      submitBtn.innerHTML = "ご回答を送信<span>Submit RSVP</span>";
+      submitBtn.innerHTML =
+        "ご回答を送信<span>Submit RSVP</span>";
     }
   });
 });
@@ -107,42 +134,28 @@ document.addEventListener("DOMContentLoaded", () => {
    Scroll Animations
 =========================== */
 
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach((entry)=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("visible");
-
-        }
-
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
     });
+  },
+  {
+    threshold: 0.18
+  }
+);
 
-},{
-    threshold:.18
-});
+document
+  .querySelectorAll(
+    ".text-section, .photo, .gallery-three, .timeline-item, .form-block"
+  )
+  .forEach((element) => {
+    element.classList.add("fade-section");
+    observer.observe(element);
+  });
 
-document.querySelectorAll(
-`
-.text-section,
-.photo,
-.gallery-three,
-.timeline-item,
-.form-block
-`
-).forEach((el)=>{
-
-    el.classList.add("fade-section");
-
-    observer.observe(el);
-
-});
-
-/* Timeline delay */
-
-document.querySelectorAll(".timeline-item").forEach((item,index)=>{
-
-    item.style.transitionDelay=(index*0.12)+"s";
-
-});
+document.querySelectorAll(".timeline-item").forEach((item, index) => {
+  item.style.transitionDelay = `${index * 0.12}s`;
+}); 
