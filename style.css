@@ -425,12 +425,27 @@ textarea::placeholder {
   opacity: 1;
 }
 
-.hidden-section {
-  max-height: 0;
-  opacity: 0;
+/* Conditional RSVP questions */
+.conditional-section {
+  max-height: 1000px;
+  opacity: 1;
   overflow: hidden;
-  margin: 0;
-  transform: translateY(-20px);
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    max-height 0.45s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    margin 0.45s ease;
+}
+
+.hidden-section {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: translateY(-16px) !important;
   pointer-events: none;
 }
 

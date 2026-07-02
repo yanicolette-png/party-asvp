@@ -2,34 +2,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwEmann0ogv1VKB1DzxMH69BU8Gah_lsruUOUN-qhUjr9Y-xwga-UZG3yenazLpHzw8/exec";
 
   const form = document.getElementById("rsvpForm");
-  const submitBtn = document.querySelector(".submit-btn");
-
-  const transportSection = document.getElementById("transportSection");
-  const dietarySection = document.getElementById("dietarySection");
-
-  const ceremonyAttend = document.getElementById("ceremonyAttend");
-  const ceremonyAbsent = document.getElementById("ceremonyAbsent");
+  const submitBtn = form?.querySelector(".submit-btn");
   const lunchAttend = document.getElementById("lunchAttend");
   const lunchAbsent = document.getElementById("lunchAbsent");
+  const parkingSection = document.getElementById("parkingSection");
+  const dietarySection = document.getElementById("dietarySection");
+
+  if (!form || !submitBtn || !lunchAttend || !lunchAbsent || !parkingSection || !dietarySection) {
+    console.error("RSVP form elements are missing. Check the IDs in index.html.");
+    return;
+  }
+
+  const parkingInputs = parkingSection.querySelectorAll('input[name="Parking"]');
+  const dietaryInput = dietarySection.querySelector('textarea[name="Dietary"]');
+
+  function setSectionVisible(section, visible) {
+    section.classList.toggle("hidden-section", !visible);
+    section.setAttribute("aria-hidden", String(!visible));
+  }
 
   function updateConditionalSections() {
-    if (ceremonyAttend.checked) {
-      transportSection.classList.remove("hidden-section");
-    } else {
-      transportSection.classList.add("hidden-section");
-    }
+    const isAttending = lunchAttend.checked;
 
-    if (lunchAttend.checked) {
-      dietarySection.classList.remove("hidden-section");
-    } else {
-      dietarySection.classList.add("hidden-section");
+    setSectionVisible(parkingSection, isAttending);
+    setSectionVisible(dietarySection, isAttending);
+
+    parkingInputs.forEach((input) => {
+      input.disabled = !isAttending;
+
+      // Remove an old answer if the guest changes from Attend to Absent.
+      if (!isAttending) input.checked = false;
+    });
+
+    if (dietaryInput) {
+      dietaryInput.disabled = !isAttending;
+      if (!isAttending) dietaryInput.value = "";
     }
   }
 
-  [ceremonyAttend, ceremonyAbsent, lunchAttend, lunchAbsent].forEach(input => {
+  [lunchAttend, lunchAbsent].forEach((input) => {
     input.addEventListener("change", updateConditionalSections);
   });
 
+  // Initial state: only the lunch attendance question is visible.
   updateConditionalSections();
 
   form.addEventListener("submit", async (event) => {
@@ -85,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
         top: document.body.scrollHeight,
         behavior: "smooth"
       });
-
     } catch (error) {
+      console.error(error);
       alert("送信できませんでした。もう一度お試しください。");
       submitBtn.disabled = false;
       submitBtn.innerHTML = "ご回答を送信<span>Submit RSVP</span>";
@@ -136,29 +151,4 @@ document.querySelectorAll(".timeline-item").forEach((item,index)=>{
 
     item.style.transitionDelay=(index*0.12)+"s";
 
-});
-
-/* ===========================
-   Scroll Animations
-=========================== */
-
-const animationObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, {
-  threshold: 0.18
-});
-
-document.querySelectorAll(
-  ".text-section, .photo, .gallery-three, .timeline-item, .form-block"
-).forEach((el) => {
-  el.classList.add("fade-section");
-  animationObserver.observe(el);
-});
-
-document.querySelectorAll(".timeline-item").forEach((item, index) => {
-  item.style.transitionDelay = `${index * 0.12}s`;
 });

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css?v=20260702-3">
 </head>
 
 <body>
@@ -132,6 +132,7 @@
           We'll provide all the essentials for your comfort and enjoyment.
           <br><br>
           We'll have light meals, free-flowing drinks, and warm welcome for everyone.
+        </p>
       </div>
 
       <div class="split-column japanese">
@@ -255,7 +256,7 @@
         </label>
         <input type="text" name="Name" placeholder="Takatora Kanaya" required>
       </div>
-
+    </section>
 
     <section class="form-block">
       <div class="section-title">
@@ -263,48 +264,51 @@
         <span>Attendance</span>
       </div>
 
-      <div class="attendance-item">
-        <h3>ご出席</h3>
-        <p>Attendance</p>
+      <!-- This is the only attendance question shown initially. -->
+      <div class="attendance-item" id="lunchSection">
+        <h3>披露宴</h3>
+        <p>Reception</p>
 
         <div class="ema-row">
           <label class="ema-option">
-            <input id="ceremonyAttend" type="radio" name="Attend" value="Attend" required>
+            <input id="lunchAttend" type="radio" name="Lunch" value="Attend" required>
             <img src="https://raw.githubusercontent.com/yanicolette-png/wedding-rsvp/main/images/attend.png" alt="Attend">
           </label>
 
           <label class="ema-option">
-            <input id="ceremonyAbsent" type="radio" name="Attend" value="Absent">
+            <input id="lunchAbsent" type="radio" name="Lunch" value="Absent">
             <img src="https://raw.githubusercontent.com/yanicolette-png/wedding-rsvp/main/images/absent.png" alt="Absent">
           </label>
         </div>
       </div>
 
-      <div class="attendance-item">
+      <!-- Revealed only when Lunch = Attend. -->
+      <div class="attendance-item conditional-section hidden-section" id="parkingSection" aria-hidden="true">
         <h3>駐車場利用</h3>
         <p>Parking</p>
 
         <div class="ema-row">
           <label class="ema-option">
-            <input type="radio" name="Parking" value="Yes">
+            <input type="radio" name="Parking" value="Yes" disabled>
             <img src="https://raw.githubusercontent.com/yanicolette-png/wedding-rsvp/main/images/yes.png" alt="Yes">
           </label>
 
           <label class="ema-option">
-            <input type="radio" name="Parking" value="No">
+            <input type="radio" name="Parking" value="No" disabled>
             <img src="https://raw.githubusercontent.com/yanicolette-png/wedding-rsvp/main/images/no.png" alt="No">
           </label>
         </div>
       </div>
     </section>
 
-    <section class="form-block hidden-section" id="dietarySection">
+    <!-- Revealed only when Lunch = Attend. -->
+    <section class="form-block conditional-section hidden-section" id="dietarySection" aria-hidden="true">
       <div class="section-title">
         <h2>アレルギー・食事制限</h2>
         <span>Allergy / Restriction</span>
       </div>
 
-      <textarea name="Dietary" rows="2" placeholder="e.g. Shrimp allergy"></textarea>
+      <textarea name="Dietary" rows="2" placeholder="e.g. Shrimp allergy" disabled></textarea>
     </section>
 
     <section class="form-block">
@@ -325,6 +329,6 @@
 
 </main>
 
-<script src="script.js"></script>
+<script src="./script.js?v=20260702-3"></script>
 </body>
 </html>
