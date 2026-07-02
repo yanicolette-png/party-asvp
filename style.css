@@ -1,1 +1,979 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  background: #f8f4ee;
+  color: #55463a;
+  font-family: "Shippori Mincho", serif;
+  overflow-x: hidden;
+}
+
+.hero,
+.text-section,
+.form-section {
+  width: min(560px, calc(100vw - 40px));
+  margin: 0 auto;
+}
+
+.hero {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: "Cormorant SC", serif;
+  font-size: 54px;
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.hero h1 span {
+  display: block;
+  font-size: 32px;
+  margin: 18px 0;
+}
+
+.hero-subtitle,
+.hero-date {
+  font-family: "Cormorant SC", serif;
+  color: #8a6a4a;
+  letter-spacing: 0.16em;
+  margin-top: 32px;
+}
+
+/* Hero moss + stone lantern divider */
+.line {
+  display: block;
+  flex-shrink: 0;
+
+  width: min(420px, 82vw);
+  height: 70px;
+  margin: 22px auto 0;
+
+  background-image: url("https://yanicolette-png.github.io/wedding-rsvp/divider.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  opacity: 1;
+  pointer-events: none;
+}
+
+.photo {
+  margin: 72px auto;
+  overflow: hidden;
+  background: #eee6dc;
+}
+
+.photo img,
+.gallery-three img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Photos */
+.photo-main {
+  width: min(560px, calc(100vw - 40px));
+  aspect-ratio: 4 / 5;
+  padding: 10px;
+  border: 1px solid #d9d1c7;
+}
+
+.photo-portrait {
+  width: min(430px, calc(100vw - 64px));
+  aspect-ratio: 3 / 4;
+  padding: 10px;
+  border: 1px solid #d9d1c7;
+}
+
+.photo-wide {
+  width: 100vw;
+  aspect-ratio: 16 / 7;
+}
+
+/* 3-photo gallery */
+.gallery-three {
+  width: min(1100px, calc(100vw - 40px));
+  margin: 72px auto;
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 16px;
+}
+
+.gallery-large,
+.gallery-stack div {
+  overflow: hidden;
+  background: #eee6dc;
+}
+
+.gallery-large {
+  aspect-ratio: 4 / 5;
+}
+
+.gallery-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+
+.gallery-stack div {
+  aspect-ratio: 4 / 3;
+}
+
+/* Text sections */
+.text-section {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.text-section::before,
+.form-block::before {
+  content: "";
+  display: block;
+  width: 170px;
+  height: 18px;
+  margin: 0 auto 34px;
+  background:
+    radial-gradient(circle, rgba(89, 118, 72, 0.75) 0 2px, transparent 3px),
+    linear-gradient(90deg, transparent, #c7a98b 22%, transparent 22% 38%, #8a6a4a 38% 40%, transparent 40% 60%, #8a6a4a 60% 62%, transparent 62% 78%, #c7a98b 78%, transparent);
+  background-size: 14px 14px, 100% 1px;
+  background-repeat: repeat-x, no-repeat;
+  background-position: center top, center 9px;
+  opacity: 0.8;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.section-title h2,
+.form-block h2 {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.section-title span {
+  display: block;
+  font-family: "Cormorant SC", serif;
+  font-size: 14px;
+  color: #8a6a4a;
+  letter-spacing: 0.1em;
+}
+
+.text-section p {
+  font-size: 14px;
+  line-height: 2.15;
+  margin-bottom: 32px;
+}
+
+.wide-section {
+  width: min(980px, calc(100vw - 40px));
+}
+
+/* English right / Japanese left */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.split-column {
+  border-top: 1px solid #d9d1c7;
+  padding-top: 26px;
+}
+
+.split-column.english {
+  text-align: right;
+}
+
+.split-column.japanese {
+  text-align: left;
+}
+
+.detail {
+  margin-bottom: 28px;
+}
+
+.detail span {
+  display: block;
+  font-family: "Cormorant SC", serif;
+  color: #8a6a4a;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.detail p,
+.split-column p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* Timeline */
+.timeline {
+  width: min(330px, 100%);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 22px;
+  padding-bottom: 34px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 76px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #8a6a4a;
+  border-radius: 50%;
+  background: #f8f4ee;
+}
+
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  left: 80px;
+  top: 21px;
+  width: 1px;
+  height: calc(100% - 18px);
+  background: #d9d1c7;
+}
+
+.timeline-item:last-child::after {
+  display: none;
+}
+
+.timeline-item time {
+  font-family: "Cormorant SC", serif;
+  color: #8a6a4a;
+  font-size: 18px;
+}
+
+.timeline-item p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.timeline-item span {
+  display: block;
+  color: #8a6a4a;
+  font-size: 13px;
+}
+
+/* Map button */
+.map-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 240px;
+  margin-top: 18px;
+  padding: 16px 34px;
+  border: 1px solid #8a6a4a;
+  border-radius: 999px;
+  color: #8a6a4a;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.map-link span {
+  font-size: 15px;
+}
+
+.map-link small {
+  font-family: "Cormorant SC", serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.map-link:hover {
+  background: #8a6a4a;
+  color: #fff;
+}
+
+/* RSVP */
+.form-section {
+  margin-bottom: 80px;
+}
+
+.form-block {
+  text-align: center;
+  margin-bottom: 72px;
+  transition: all 0.4s ease;
+}
+
+.field {
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+label span {
+  display: block;
+  font-size: 15px;
+}
+
+label small,
+.form-block .section-title span {
+  display: block;
+  font-family: "Cormorant SC", serif;
+  font-size: 13px;
+  color: #8a6a4a;
+  letter-spacing: 0.06em;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #d9d1c7;
+  background: transparent;
+  padding: 12px 4px;
+  font-family: "Shippori Mincho", serif;
+  font-size: 16px;
+  color: #55463a;
+  outline: none;
+}
+
+textarea {
+  border: 1px solid #d9d1c7;
+  border-radius: 12px;
+  padding: 14px;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #b8aa9c;
+}
+
+.attendance-item {
+  margin-bottom: 44px;
+}
+
+.attendance-item h3 {
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.attendance-item p {
+  font-family: "Cormorant SC", serif;
+  color: #8a6a4a;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.ema-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ema-option {
+  width: 145px;
+  max-width: 42%;
+  cursor: pointer;
+}
+
+.ema-option input {
+  display: none;
+}
+
+.ema-option img {
+  width: 100%;
+  display: block;
+  transition: 0.25s ease;
+}
+
+.ema-option input:checked + img {
+  transform: translateY(-6px) scale(1.08);
+  filter: drop-shadow(0 12px 20px rgba(138, 106, 74, 0.35));
+   animation-duration:3.5s;
+}
+
+.ema-row:has(input:checked) .ema-option img {
+  opacity: 0.55;
+}
+
+.ema-row:has(input:checked) .ema-option input:checked + img {
+  opacity: 1;
+}
+
+.hidden-section {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.form-block:not(.hidden-section) {
+  max-height: 1800px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  background: #8a6a4a;
+  color: #fff;
+  font-family: "Shippori Mincho", serif;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  padding: 18px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.submit-btn span {
+  display: block;
+  font-family: "Cormorant SC", serif;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .wide-section {
+    width: min(100vw - 36px, 560px);
+  }
+
+  .split-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .detail p,
+  .split-column p {
+    font-size: 12px;
+    line-height: 1.85;
+  }
+
+  .detail span {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 43px;
+  }
+
+  .hero h1 span {
+    font-size: 27px;
+  }
+
+  .photo {
+    margin: 58px auto;
+  }
+
+  .photo-main {
+    width: min(92vw, 420px);
+  }
+
+  .photo-portrait {
+    width: min(84vw, 340px);
+  }
+
+  .photo-wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .gallery-three {
+    width: calc(100vw - 28px);
+    grid-template-columns: 1.25fr 1fr;
+    gap: 8px;
+    margin: 58px auto 72px;
+  }
+
+  .gallery-large {
+    aspect-ratio: 3 / 4;
+  }
+
+  .gallery-stack {
+    gap: 8px;
+  }
+
+  .gallery-stack div {
+    aspect-ratio: 1 / 1;
+  }
+
+  .section-title h2,
+  .form-block h2 {
+    font-size: 22px;
+  }
+
+  .timeline {
+    max-width: 300px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .timeline-item::before {
+    left: 68px;
+  }
+
+  .timeline-item::after {
+    left: 72px;
+  }
+
+  .ema-row {
+    gap: 14px;
+  }
+
+  .ema-option {
+    width: 130px;
+    max-width: 45%;
+  }
+}
+/* ===========================
+   Fade In Animation
+=========================== */
+
+.fade-section{
+    opacity:0;
+    transform:translateY(50px);
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.fade-section.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+.photo img,
+.gallery-three img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+
+    transform:scale(1);
+
+    transition:transform 12s ease;
+
+}
+
+.photo:hover img,
+.gallery-three div:hover img{
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* ===========================
+   Ema Floating Animation
+   + ema.png Selected Effect
+=========================== */
+
+@keyframes emaSwing {
+  0%,
+  55%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  60% {
+    transform: rotate(4deg);
+  }
+
+  68% {
+    transform: rotate(-4deg);
+  }
+
+  76% {
+    transform: rotate(3deg);
+  }
+
+  84% {
+    transform: rotate(-2deg);
+  }
+
+  92% {
+    transform: rotate(1deg);
+  }
+}
+
+/* Animate the complete label so the Ema and overlay move together */
+.ema-option {
+  position: relative;
+  overflow: visible;
+
+  transform-origin: top center;
+  animation: emaSwing 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Original Ema image */
+.ema-option img {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  display: block;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* New realistic checked overlay */
+/* ===================================
+   Small ema.png decorations when checked
+=================================== */
+
+/* ===================================
+   Bottom stone decorations when checked
+=================================== */
+
+.ema-option {
+  position: relative;
+  overflow: visible;
+}
+
+/* Hidden stone decorations */
+.ema-option::before,
+.ema-option::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+
+  width: 80px;
+  height: 60px;
+
+  background-image:
+    url("https://yanicolette-png.github.io/wedding-rsvp/images/ema.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 3;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease;
+}
+
+/* Bottom-left stone */
+.ema-option::before {
+  left: 3px;
+  transform: translateY(-4px) rotate(5deg) scale(0.8);
+}
+
+/* Bottom-right stone */
+.ema-option::after {
+  right: 3px;
+  transform: translateY(-4px) rotate(-5deg) scale(0.8);
+}
+
+/* Show bottom-left stone when checked */
+.ema-option:has(input:checked)::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) rotate(5deg) scale(1);
+}
+
+/* Show bottom-right stone when checked */
+.ema-option:has(input:checked)::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) rotate(-5deg) scale(1);
+}
+
+/* Selected Ema */
+.ema-option input:checked + img {
+  transform: translateY(-6px) scale(1.06);
+  filter: drop-shadow(
+    0 12px 20px rgba(88, 76, 54, 0.3)
+  );
+}
+
+
+/* Selected wooden Ema */
+.ema-option input:checked + img {
+  transform: translateY(-6px) scale(1.06);
+
+  filter:
+    drop-shadow(0 12px 20px rgba(88, 76, 54, 0.3));
+}
+
+/* Dim the unselected option */
+.ema-row:has(input:checked) .ema-option img {
+  opacity: 0.5;
+}
+
+/* Keep selected option fully visible */
+.ema-row:has(input:checked)
+.ema-option input:checked + img {
+  opacity: 1;
+}
+
+/* Selected option swings slightly more often */
+.ema-option:has(input:checked) {
+  animation-duration: 3.8s;
+}
+
+/* Different natural timing */
+.attendance-item:nth-child(1)
+.ema-option:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.attendance-item:nth-child(1)
+.ema-option:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.attendance-item:nth-child(2)
+.ema-option:nth-child(1) {
+  animation-delay: 1.6s;
+}
+
+.attendance-item:nth-child(2)
+.ema-option:nth-child(2) {
+  animation-delay: 2.4s;
+}
+
+.attendance-item:nth-child(3)
+.ema-option:nth-child(1) {
+  animation-delay: 3.2s;
+}
+
+.attendance-item:nth-child(3)
+.ema-option:nth-child(2) {
+  animation-delay: 4s;
+}
+
+/* ========================
+   Timeline Animation
+======================== */
+
+.timeline-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================
+   Paper Background + Moss Border + Lantern Divider
+======================== */
+
+:root {
+  --moss-border-image:
+    url("https://yanicolette-png.github.io/wedding-rsvp/images/mossborder.png?v=1");
+
+  --paper-base: #f8f4ee;
+}
+
+/* Main paper background */
+html {
+  background-color: var(--paper-base);
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      rgba(255, 255, 255, 0.48),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 28%,
+      rgba(214, 199, 178, 0.18),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #faf7f0 0%,
+      #f6f0e7 48%,
+      #f3ebe1 100%
+    ) !important;
+}
+
+/* Subtle moss texture over the paper */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 0;
+
+  background-image: var(--moss-border-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  opacity: 0.075;
+  mix-blend-mode: multiply;
+
+  filter:
+    saturate(0.72)
+    brightness(1.08)
+    contrast(0.92);
+
+  animation: mossBackgroundBreath 34s ease-in-out infinite;
+}
+
+/* Real moss border above the paper */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 0;
+
+  background-image: var(--moss-border-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  opacity: 0.58;
+
+  filter:
+    saturate(0.78)
+    brightness(1.03)
+    contrast(0.92);
+}
+
+/* Gentle background movement */
+@keyframes mossBackgroundBreath {
+  0%,
+  100% {
+    opacity: 0.065;
+    filter:
+      saturate(0.70)
+      brightness(1.08)
+      contrast(0.92);
+  }
+
+  50% {
+    opacity: 0.095;
+    filter:
+      saturate(0.78)
+      brightness(1.04)
+      contrast(0.96);
+  }
+}
+
+/* Keep website content above the moss layers */
+header,
+main,
+.hero,
+.text-section,
+.photo,
+.gallery-three,
+.form-section,
+.form-block {
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+  body::before {
+    background-size: auto 100%;
+    opacity: 0.055;
+  }
+
+  body::after {
+    background-size: 100% 100%;
+    opacity: 0.48;
+  }
+}
+
+
+/* ==========================================
+   Custom Divider (divider.png)
+========================================== */
+
+/* Custom Divider */
+.text-section::before,
+.form-block::before {
+  content: "";
+  display: block;
+
+  width: min(360px, 76vw);
+  height: 48px;
+  margin: 0 auto 38px;
+
+  background-image: url("https://yanicolette-png.github.io/wedding-rsvp/images/divider.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  opacity: 1;
+  filter: none;
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .line {
+    width: min(330px, 88vw);
+    height: 56px;
+    margin-top: 18px;
+  }
+}
+
+/* Center text fields away from moss border */
+.form-block .field {
+  width: min(440px, calc(100% - 200px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .form-block .field {
+    width: calc(100% - 100px);
+  }
+}
