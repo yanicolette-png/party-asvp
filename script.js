@@ -59,13 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const data = {
       Name: formData.get("Name") || "",
-      Postal: formData.get("Postal") || "",
-      Address: formData.get("Address") || "",
-      Ceremony: formData.get("Ceremony") || "",
       Lunch: formData.get("Lunch") || "",
-      Afterparty: formData.get("Afterparty") || "",
-      Bus_AM: formData.get("Bus_AM") || "",
-      Bus_PM: formData.get("Bus_PM") || "",
       Parking: formData.get("Parking") || "",
       Dietary: formData.get("Dietary") || "",
       MSG: formData.get("MSG") || ""
